@@ -1,26 +1,38 @@
 'use client'
 
 const words = [
-  'React', '/', 'Next.js', '/', 'TypeScript', '/', 'Motion Design', '/',
-  'Three.js', '/', 'Tailwind CSS', '/', 'Node.js', '/', 'UI · UX', '/',
-  'React', '/', 'Next.js', '/', 'TypeScript', '/', 'Motion Design', '/',
-  'Three.js', '/', 'Tailwind CSS', '/', 'Node.js', '/', 'UI · UX', '/',
+  'Design', '·', 'Développement', '·', 'Motion', '·', 'Interface', '·', 'Typographie', '·', 'Interaction', '·',
+  'Design', '·', 'Développement', '·', 'Motion', '·', 'Interface', '·', 'Typographie', '·', 'Interaction', '·',
 ]
 
 export function Marquee() {
   return (
-    <section className="py-6 border-y border-[var(--line)] overflow-hidden bg-[var(--bg)]">
+    <div
+      style={{
+        borderTop: '1px solid var(--line)',
+        borderBottom: '1px solid var(--line)',
+        padding: '14px 0',
+        overflow: 'hidden',
+      }}
+    >
       <div className="marquee-track">
         {words.map((w, i) => (
           <span
             key={i}
-            className="px-5 label whitespace-nowrap"
-            style={{ fontSize: '0.7rem', color: i % 2 === 1 ? 'var(--line)' : 'var(--ink-muted)' }}
+            style={{
+              padding: '0 20px',
+              fontSize: '0.7rem',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: w === '·' ? 'var(--line)' : 'var(--muted)',
+              fontWeight: 400,
+              whiteSpace: 'nowrap',
+            }}
           >
             {w}
           </span>
         ))}
       </div>
-    </section>
+    </div>
   )
 }
