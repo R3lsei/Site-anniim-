@@ -1,130 +1,134 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600&display=swap');
 
 :root {
-  --bg: #F5F2ED;
-  --bg-alt: #EDEAE4;
-  --ink: #0A0A0A;
-  --ink-muted: #6B6B6B;
-  --accent: #1A1A1A;
-  --line: #D5D2CB;
-  --green: #22C55E;
-  --radius: 2px;
+  --bg:        #FAFAFA;
+  --bg-alt:    #F3F3F1;
+  --ink:       #09090B;
+  --ink-mid:   #3F3F46;
+  --ink-muted: #71717A;
+  --line:      #E4E4E7;
+  --green:     #16A34A;
+  --radius:    4px;
 }
 
 @theme inline {
-  --font-sans: 'Space Grotesk', sans-serif;
+  --font-sans:    'Space Grotesk', sans-serif;
   --font-heading: 'Archivo', sans-serif;
   --color-background: var(--bg);
   --color-foreground: var(--ink);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
   scroll-behavior: smooth;
   background: var(--bg);
+  font-size: 16px;
 }
 
 body {
   background: var(--bg);
   color: var(--ink);
   font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
   overflow-x: hidden;
-  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 {
   font-family: 'Archivo', sans-serif;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.03em;
+  color: var(--ink);
 }
 
-/* Cursor */
+p {
+  color: var(--ink-mid);
+  line-height: 1.75;
+  max-width: 60ch;
+}
+
+/* ---- Cursor ---- */
 * { cursor: none !important; }
 
 .cursor {
   position: fixed;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   background: var(--ink);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
   mix-blend-mode: difference;
+  transition: width 0.25s, height 0.25s;
 }
-.cursor.big {
-  width: 60px;
-  height: 60px;
-  background: var(--ink);
-  mix-blend-mode: difference;
-}
+.cursor.big { width: 56px; height: 56px; }
 
 .cursor-trail {
   position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(10,10,10,0.3);
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(9,9,11,0.18);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
-  transition: left 0.15s ease, top 0.15s ease;
+  transition: left 0.13s ease, top 0.13s ease;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 3px; }
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 2px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--line); }
 
-/* Selection */
+/* ---- Selection ---- */
 ::selection { background: var(--ink); color: var(--bg); }
 
-/* Divider line */
-.divider {
-  height: 1px;
-  background: var(--line);
-  width: 100%;
-}
+/* ---- Divider ---- */
+.divider { height: 1px; background: var(--line); width: 100%; }
 
-/* Tag */
-.tag {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-family: 'Space Grotesk', monospace;
+/* ---- Label / tag ---- */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
 
-/* Marquee */
+/* ---- Marquee ---- */
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
 }
-.marquee-inner {
-  animation: marquee 20s linear infinite;
+.marquee-track {
   display: flex;
   white-space: nowrap;
+  animation: marquee 30s linear infinite;
 }
 
-/* 3D canvas */
+/* ---- 3D canvas ---- */
 #three-canvas {
   position: fixed;
   top: 0; left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
+  opacity: 0.55;
 }
 
+/* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-  .marquee-inner { animation: none; }
+  .marquee-track { animation: none; }
 }

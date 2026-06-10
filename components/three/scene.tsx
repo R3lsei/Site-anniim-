@@ -26,13 +26,13 @@ export function ThreeScene() {
 
     // Materials
     const wireMat = new THREE.MeshBasicMaterial({
-      color: 0x0A0A0A,
+      color: 0x09090B,
       wireframe: true,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.1,
     })
-    const lineMat = new THREE.LineBasicMaterial({ color: 0x0A0A0A, transparent: true, opacity: 0.25 })
-    const solidMat = new THREE.MeshBasicMaterial({ color: 0x0A0A0A, transparent: true, opacity: 0.04 })
+    const lineMat = new THREE.LineBasicMaterial({ color: 0x09090B, transparent: true, opacity: 0.18 })
+    const solidMat = new THREE.MeshBasicMaterial({ color: 0x09090B, transparent: true, opacity: 0.02 })
 
     // Objects
     const objects: Array<{
@@ -133,7 +133,7 @@ export function ThreeScene() {
 
         // Fade in as they fall
         const mat = mesh.material as THREE.MeshBasicMaterial
-        mat.opacity = 0.08 + eased * 0.12
+        mat.opacity = 0.06 + eased * 0.1
       })
 
       // Subtle camera drift

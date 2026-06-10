@@ -45,23 +45,24 @@ export function Work() {
   const [hovered, setHovered] = useState<number | null>(null)
   const [imgPos, setImgPos] = useState({ x: 0, y: 0 })
 
-  const onMouseMove = (e: React.MouseEvent) => {
-    setImgPos({ x: e.clientX, y: e.clientY })
-  }
-
   return (
-    <section id="travaux" ref={ref} className="py-32 px-8" onMouseMove={onMouseMove}>
+    <section
+      id="travaux"
+      ref={ref}
+      className="py-40 px-8"
+      onMouseMove={(e) => setImgPos({ x: e.clientX, y: e.clientY })}
+    >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="flex items-end justify-between mb-16">
+        <div className="flex items-end justify-between mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <span className="tag block mb-4">02 — Travaux sélectionnés</span>
+            <span className="label block mb-5">02 — Travaux sélectionnés</span>
             <h2
-              className="text-[clamp(3rem,8vw,7rem)] font-black tracking-tighter text-[var(--ink)] leading-none"
+              className="text-[clamp(2.5rem,7vw,6rem)] font-black tracking-tighter text-[var(--ink)] leading-none"
               style={{ fontFamily: 'Archivo, sans-serif' }}
             >
               Projets
@@ -71,68 +72,87 @@ export function Work() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3 }}
-            className="tag hidden md:block"
+            className="label hidden md:block"
           >
             {projects.length} projets
           </motion.span>
         </div>
 
-        {/* List */}
+        {/* Project list */}
         <div className="divide-y divide-[var(--line)]">
           {projects.map((p, i) => (
             <motion.div
               key={p.num}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
+              transition={{ delay: i * 0.09, duration: 0.6 }}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
-              className="group flex items-center justify-between py-8 gap-6 transition-all duration-300"
-              style={{ opacity: hovered !== null && hovered !== i ? 0.35 : 1 }}
+              className="group flex items-center justify-between py-9 gap-6 cursor-pointer"
+              style={{
+                opacity: hovered !== null && hovered !== i ? 0.3 : 1,
+                transition: 'opacity 0.25s ease',
+              }}
               data-hover
             >
               <div className="flex items-center gap-8 flex-1 min-w-0">
-                <span className="tag shrink-0">{p.num}</span>
+                <span className="label shrink-0 w-8">{p.num}</span>
                 <div className="min-w-0">
                   <h3
-                    className="text-2xl md:text-4xl font-black tracking-tight text-[var(--ink)] leading-none truncate group-hover:translate-x-2 transition-transform duration-300"
-                    style={{ fontFamily: 'Archivo, sans-serif' }}
+                    className="text-2xl md:text-[2.25rem] font-black tracking-tight text-[var(--ink)] leading-none truncate"
+                    style={{
+                      fontFamily: 'Archivo, sans-serif',
+                      transform: hovered === i ? 'translateX(6px)' : 'translateX(0)',
+                      transition: 'transform 0.3s ease',
+                    }}
                   >
                     {p.title}
                   </h3>
-                  <div className="flex items-center gap-3 mt-2">
-                    <span className="tag">{p.role}</span>
-                    {p.tags.map(t => (
-                      <span key={t} className="tag px-2 py-0.5 border border-[var(--line)]">{t}</span>
+                  <div className="flex items-center gap-3 mt-2.5 flex-wrap">
+                    <span className="label">{p.role}</span>
+                    {p.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="label px-2 py-1 border border-[var(--line)] rounded-sm"
+                        style={{ lineHeight: 1 }}
+                      >
+                        {t}
+                      </span>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 shrink-0">
-                <span className="tag hidden md:block">{p.year}</span>
-                <motion.div
-                  whileHover={{ rotate: 45 }}
-                  className="w-10 h-10 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:border-[var(--ink)] transition-all duration-300"
+              <div className="flex items-center gap-5 shrink-0">
+                <span className="label hidden md:block">{p.year}</span>
+                <div
+                  className="w-10 h-10 rounded-full border border-[var(--line)] flex items-center justify-center transition-all duration-300"
+                  style={{
+                    backgroundColor: hovered === i ? 'var(--ink)' : 'transparent',
+                    borderColor: hovered === i ? 'var(--ink)' : 'var(--line)',
+                  }}
                 >
-                  <ArrowUpRight className="w-4 h-4 group-hover:text-[var(--bg)] transition-colors" />
-                </motion.div>
+                  <ArrowUpRight
+                    className="w-4 h-4 transition-colors duration-300"
+                    style={{ color: hovered === i ? 'var(--bg)' : 'var(--ink-muted)' }}
+                  />
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Hover image preview */}
+      {/* Floating image preview */}
       <motion.div
-        className="fixed pointer-events-none z-40 w-72 h-48 rounded-2xl overflow-hidden shadow-2xl"
+        className="fixed pointer-events-none z-40 w-64 h-44 rounded-xl overflow-hidden shadow-2xl"
         animate={{
-          x: imgPos.x + 20,
-          y: imgPos.y - 96,
+          x: imgPos.x + 24,
+          y: imgPos.y - 88,
           opacity: hovered !== null ? 1 : 0,
-          scale: hovered !== null ? 1 : 0.8,
+          scale: hovered !== null ? 1 : 0.88,
         }}
-        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+        transition={{ type: 'spring', stiffness: 220, damping: 22 }}
         style={{ top: 0, left: 0 }}
       >
         {hovered !== null && (
