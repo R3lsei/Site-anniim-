@@ -61,7 +61,7 @@ export function Projects() {
   const [hovered, setHovered] = useState<number | null>(null)
 
   return (
-    <section ref={ref} id="projects" className="relative py-32 px-6">
+    <section ref={ref} id="projects" className="relative py-40 px-8">
       {/* Ambient */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[160px] opacity-5 pointer-events-none"
         style={{ background: 'radial-gradient(circle, #A855F7, transparent)' }} />
@@ -71,7 +71,7 @@ export function Projects() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
           <span className="text-green-400 font-mono text-sm tracking-widest uppercase mb-4 block">// Projets</span>
           <h2 className="text-5xl md:text-6xl font-black text-white mb-6" style={{ fontFamily: 'Archivo, sans-serif' }}>
@@ -83,7 +83,7 @@ export function Projects() {
         </motion.div>
 
         {/* Featured projects */}
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
           {projects.filter(p => p.featured).map((project, i) => (
             <motion.div
               key={project.title}
@@ -142,14 +142,14 @@ export function Projects() {
         </div>
 
         {/* Other projects grid */}
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 gap-6">
           {projects.filter(p => !p.featured).map((project, i) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-              className="glass glass-hover cursor-pointer p-6 group relative overflow-hidden"
+              className="glass glass-hover cursor-pointer p-8 group relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-1 rounded-t-2xl transition-all duration-300 group-hover:h-2"
                 style={{ background: `linear-gradient(90deg, ${project.color}, transparent)` }} />

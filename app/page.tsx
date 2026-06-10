@@ -8,7 +8,7 @@ import { Contact } from '@/components/sections/contact'
 
 export default function Home() {
   return (
-    <div className="noise relative min-h-screen bg-black">
+    <div className="noise relative min-h-screen" style={{ background: '#0D1117' }}>
       <Particles />
       <Navbar />
       <main className="relative z-10">
@@ -18,7 +18,7 @@ export default function Home() {
         <Projects />
         <Contact />
       </main>
-      <footer className="relative z-10 text-center py-8 border-t border-white/5">
+      <footer className="relative z-10 text-center py-12 border-t border-white/8">
         <p className="text-slate-600 text-sm font-mono">
           © 2025 Alexandre Dupont — Fait avec <span className="text-green-500">♥</span> et Next.js
         </p>

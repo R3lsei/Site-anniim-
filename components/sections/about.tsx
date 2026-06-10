@@ -25,14 +25,14 @@ export function About() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section ref={ref} id="about" className="relative py-32 px-6">
+    <section ref={ref} id="about" className="relative py-40 px-8" style={{ background: 'rgba(255,255,255,0.02)' }}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
           <span className="text-green-400 font-mono text-sm tracking-widest uppercase mb-4 block">// À propos</span>
           <h2 className="text-5xl md:text-6xl font-black text-white mb-6" style={{ fontFamily: 'Archivo, sans-serif' }}>
@@ -44,7 +44,7 @@ export function About() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-20 items-center">
           {/* Skills */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -52,7 +52,7 @@ export function About() {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <h3 className="text-2xl font-bold text-white mb-8">Compétences techniques</h3>
-            <div className="space-y-5">
+            <div className="space-y-7">
               {skills.map((skill, i) => (
                 <div key={skill.name}>
                   <div className="flex justify-between mb-2">
@@ -78,7 +78,7 @@ export function About() {
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="grid grid-cols-2 gap-4"
+            className="grid grid-cols-2 gap-5"
           >
             {traits.map(({ icon: Icon, title, desc }, i) => (
               <motion.div
@@ -86,7 +86,7 @@ export function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.5 + i * 0.1 }}
-                className="glass glass-hover p-6 cursor-default"
+                className="glass glass-hover p-8 cursor-default"
               >
                 <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-green-400" />

@@ -25,7 +25,7 @@ export function Contact() {
   ]
 
   return (
-    <section ref={ref} id="contact" className="relative py-32 px-6">
+    <section ref={ref} id="contact" className="relative py-40 px-8">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full blur-[160px] opacity-10 pointer-events-none"
         style={{ background: 'radial-gradient(circle, #22C55E, transparent)' }} />
 
@@ -33,7 +33,7 @@ export function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
           <span className="text-green-400 font-mono text-sm tracking-widest uppercase mb-4 block">// Contact</span>
           <h2 className="text-5xl md:text-6xl font-black text-white mb-6" style={{ fontFamily: 'Archivo, sans-serif' }}>
@@ -44,13 +44,13 @@ export function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-16">
           {/* Infos */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.2 }}
-            className="space-y-6"
+            className="space-y-8"
           >
             {infos.map(({ icon: Icon, label, value }, i) => (
               <motion.div
